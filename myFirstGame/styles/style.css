@@ -2,7 +2,9 @@
   --color-primary: #00bcd4;
   --color-primary-dark: #00838f;
 }
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
 * {
+  font-family: "Roboto Mono", monospace;
   box-sizing: border-box;
 }
 @keyframes rain {
@@ -11,6 +13,14 @@
   }
   100% {
     top: 120%;
+  }
+}
+@keyframes fallDown {
+  0% {
+    transform: translate(-50%, -70%), rotate(-45deg);
+  }
+  100% {
+    transform: translate(-50%, -100%), rotate(-45deg);
   }
 }
 @keyframes fadeUp {
@@ -41,11 +51,18 @@
   position: fixed;
   top: 70%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 100px;
-  background-color: var(--color-primary);
+  width: 49px;
+  height: 70px;
+  background-image: url(../imgs/player.png);
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: 1;
+  transform: translate(-50%, -150%) rotate(0deg);
+  transition: transform 1s ease-in-out;
+}
+.dead {
+  transform: rotate(180deg) !important;
+  transition: transform 1s ease-in-out;
 }
 .obstacle {
   position: fixed;
@@ -54,6 +71,36 @@
   height: 100px;
   background-color: var(--color-primary-dark);
   z-index: 1;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+.level12 {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../imgs/level12.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.level34 {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../imgs/level34.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.level56 {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../imgs/level56.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.level78 {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../imgs/level78.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 #score {
   position: fixed;
@@ -66,7 +113,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.5em;
-  color: var(--color-primary);
+  color: black;
 }
 #startDiv {
   display: flex;
@@ -101,7 +148,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 2em;
   border: 0.2em solid black;
   animation: fadeUp 1s ease-in-out;
@@ -110,6 +157,15 @@
 #gameOver h1 {
   width: 100%;
   text-align: center;
+  color: var(--color-primary-dark);
+}
+#highScore {
+  color: var(--color-primary);
+  border: 0.2em solid black;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin: 0.5em;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 #tryAgain {
   font-size: 1.5em;
@@ -118,4 +174,14 @@
   border: 0.1em solid black;
   border-radius: 0.5em;
   cursor: pointer;
+}
+.sideBar {
+  position: fixed;
+  top: 0%;
+  left: 100%;
+  transform: translateX(-100%);
+  width: 100%;
+  height: 0%;
+  background-color: var(--color-primary);
+  z-index: -1;
 }
