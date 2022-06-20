@@ -46,7 +46,7 @@
 @keyframes player {
   0% {
     background-image: url(../imgs/player-01.png);
-    transform: translate(-50%, -100%) rotate(0deg);
+    transform: translate(-50%, -150%) rotate(0deg);
   }
   12.5% {
     background-image: url(../imgs/player.png);
@@ -59,7 +59,7 @@
   }
   50% {
     background-image: url(../imgs/player03.png);
-    transform: translate(-50%, -150%) rotate(0deg);
+    transform: translate(-50%, -200%) rotate(0deg);
   }
   62.5% {
     background-image: url(../imgs/player02.png);
@@ -72,15 +72,15 @@
   }
   100% {
     background-image: url(../imgs/player-01.png);
-    transform: translate(-50%, -100%) rotate(0deg);
+    transform: translate(-50%, -150%) rotate(0deg);
   }
 }
 @keyframes playerDied {
   0% {
-    transform: translate(-50%, -150%) rotate(0deg);
+    transform: translate(-50%, -200%) rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -150%) rotate(180deg);
+    transform: translate(-50%, -200%) rotate(180deg);
   }
 }
 * {
@@ -96,20 +96,20 @@
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 1;
-  transform: translate(-50%, -150%) rotate(0deg);
+  transform: translate(-50%, -200%) rotate(0deg);
   transition: transform 1s ease-in-out;
   animation: player 1.5s infinite ease-in-out;
 }
 .dead {
   animation: playerDied 1s ease-in-out !important;
-  transform: translate(-50%, -150%) rotate(180deg) !important;
+  transform: translate(-50%, -200%) rotate(180deg) !important;
 }
 .obstacle {
   position: fixed;
   top: -20%;
   width: 70px;
   height: 100px;
-  background-color: var(--color-primary-dark);
+  background-color: white;
   z-index: 1;
   opacity: 1;
   transition: opacity 1s ease-in-out;
