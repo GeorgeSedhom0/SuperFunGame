@@ -6,22 +6,32 @@ const startBtnCont = document.querySelector("#startDiv");
 const gameOver = document.querySelector("#gameOver");
 const gameOverText = document.querySelector("#gameOverText");
 const tryAgainBtn = document.querySelector("#tryAgain");
-const sideBar = document.querySelector("#sideBar");
+const sideBar = document.querySelector(".sideBar");
 let score = 0;
 let level = 0;
 let speed = 1;
+sideBarLayer = 1;
 
 const updateScore = () => {
   score++;
   scoreElement.innerHTML = score;
 };
 const sideBarHandler = (time) => {
+  const sideBar = document.createElement("div");
+  sideBar.classList.add("sideBar");
+  document.body.appendChild(sideBar);
   sideBar.style.transition = `height ${time}s ease-in-out`;
-  sideBar.style.height = "100%";
+  sideBar.style.zIndex = -100000000 + sideBarLayer;
+  sideBar.style.backgroundColor =
+    sideBarLayer % 2 === 0
+      ? "var(--color-primary)"
+      : "var(--color-primary-dark)";
+  setTimeout(() => {
+    sideBar.style.height = "100%";
+    sideBarLayer++;
+  }, 100);
 };
 const levelUp = () => {
-  sideBar.style.transition = `height 0.2s ease-in-out`;
-  sideBar.style.height = "0%";
   level++;
   speed += (speed / 100) * 25;
   const levelUp = document.createElement("div");
