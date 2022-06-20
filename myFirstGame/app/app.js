@@ -23,7 +23,7 @@ const levelUp = () => {
   sideBar.style.transition = `height 0.2s ease-in-out`;
   sideBar.style.height = "0%";
   level++;
-  speed += (speed / 100) * 15;
+  speed += (speed / 100) * 25;
   const levelUp = document.createElement("div");
   levelUp.classList.add("levelUp");
   levelUp.innerHTML = `Level ${level} .. Speed up!`;
@@ -57,7 +57,7 @@ const obstacleCrossCheck = () => {
       playerT < obstacleB &&
       playerB > obstacleT
     ) {
-      player.style.backgroundColor = "red";
+      player.classList.add("dead");
       game.end();
     }
   });
@@ -80,22 +80,36 @@ let n = 0;
 const game = {
   gameLoop: null,
   start: () => {
-    game.gameLoop = setInterval(() => {
-      const obstacle = document.createElement("div");
-      obstacle.style.left = `${Math.random() * window.innerWidth}px`;
-      obstacle.style.animation = `rain ${(1 / speed) * 5}s ease-in-out`;
-      obstacle.classList.add("obstacle");
-      document.body.appendChild(obstacle);
-      obstacle.addEventListener("animationend", removeObstacles);
-      n++;
-      if (n >= level * 10.15) {
-        levelUp();
-        n = 0;
-        setTimeout(() => {
-          sideBarHandler(Math.ceil(level * 10.15) * 1.5);
-        }, 200);
-      }
-    }, 1500);
+    game.gameLoop = setInterval(
+      () => {
+        const obstacle = document.createElement("div");
+        obstacle.style.left = `${Math.random() * window.innerWidth}px`;
+        obstacle.style.animation = `rain ${(1 / speed) * 5}s ease-in-out`;
+        obstacle.classList.add("obstacle");
+        document.body.appendChild(obstacle);
+        obstacle.addEventListener("animationend", removeObstacles);
+        level < 3
+          ? obstacle.classList.add("level12")
+          : level < 5
+          ? obstacle.classList.add("level34")
+          : level < 7
+          ? obstacle.classList.add("level56")
+          : level < 9
+          ? obstacle.classList.add("level78")
+          : level < 11
+          ? obstacle.classList.add("level910")
+          : null;
+        n++;
+        if (n >= level * 10) {
+          levelUp();
+          levelTime = (level < 3 ? 7 : level < 7 ? 6 : 5) - 0.2;
+          setTimeout(() => {
+            sideBarHandler(levelTime);
+          }, 200);
+        }
+      },
+      level < 3 ? 700 : level < 7 ? 600 : 500
+    );
   },
   end: () => {
     clearInterval(game.gameLoop);
@@ -141,7 +155,7 @@ tryAgainBtn.addEventListener("click", () => {
   setTimeout(() => {
     gameOver.style.display = "none";
     gameOver.style.animation = "fadeUp 1s ease-in-out";
-    player.style.backgroundColor = "var(--color-primary)";
+    player.classList.remove("dead");
     game.start();
     playerReady();
     levelUp();
