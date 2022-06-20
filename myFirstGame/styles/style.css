@@ -75,6 +75,14 @@
     transform: translate(-50%, -100%) rotate(0deg);
   }
 }
+@keyframes playerDied {
+  0% {
+    transform: translate(-50%, -150%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -150%) rotate(180deg);
+  }
+}
 * {
   touch-action: none;
 }
@@ -84,16 +92,17 @@
   left: 50%;
   width: 49px;
   height: 70px;
-  /* background-image: url(../imgs/player.png); */
+  background-image: url(../imgs/player.png);
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 1;
+  transform: translate(-50%, -150%) rotate(0deg);
   transition: transform 1s ease-in-out;
   animation: player 1.5s infinite ease-in-out;
 }
 .dead {
-  transform: rotate(180deg) !important;
-  transition: transform 1s ease-in-out;
+  animation: playerDied 1s ease-in-out !important;
+  transform: translate(-50%, -150%) rotate(180deg) !important;
 }
 .obstacle {
   position: fixed;
